@@ -103,6 +103,11 @@ public class RegistrarPersona extends javax.swing.JFrame {
                 cmbFamiliaItemStateChanged(evt);
             }
         });
+        cmbFamilia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFamiliaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -228,6 +233,10 @@ public class RegistrarPersona extends javax.swing.JFrame {
             lbEstado.setText("Intente nuevamente");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void cmbFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFamiliaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbFamiliaActionPerformed
 
     public void cargarFamilias() {
         try {

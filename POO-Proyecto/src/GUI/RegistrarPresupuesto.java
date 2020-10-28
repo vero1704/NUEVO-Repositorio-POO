@@ -5,17 +5,24 @@
  */
 package GUI;
 
+import Entidades.Persona;
+import Entidades.Presupuesto;
+import Negocios.Metodos;
+import java.util.ArrayList;
+
 /**
  *
  * @author ma210
  */
 public class RegistrarPresupuesto extends javax.swing.JFrame {
-
+    Metodos procesos = new Metodos();
     /**
      * Creates new form RegistrarPresupuesto
      */
     public RegistrarPresupuesto(java.awt.Frame parent, boolean modal) {
         initComponents();
+        
+        cargarid();
     }
 
     /**
@@ -50,6 +57,7 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
         btnSalirInicio = new javax.swing.JButton();
         txtClasificacion = new javax.swing.JLabel();
         cmbClasificacion = new javax.swing.JComboBox<>();
+        lbEstado = new javax.swing.JLabel();
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -97,7 +105,11 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setText("Descripción:");
 
-        cmbIdPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbIdPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbIdPersonaActionPerformed(evt);
+            }
+        });
 
         cmbAnno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción:", "2018", "2019", "2020", "2021" }));
 
@@ -114,6 +126,11 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
 
         bntGuardarPresupuesto.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         bntGuardarPresupuesto.setText("Guardar");
+        bntGuardarPresupuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntGuardarPresupuestoActionPerformed(evt);
+            }
+        });
 
         btnSalirInicio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnSalirInicio.setText("Salir");
@@ -142,27 +159,30 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(txtClasificacion))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbIdPersona, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbAnno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbMes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbSemana, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtMonto)
-                            .addComponent(txtDescripcion)
-                            .addComponent(cmbClasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(txtClasificacion))
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbIdPersona, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbAnno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbMes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbSemana, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtMonto)
+                                    .addComponent(txtDescripcion)
+                                    .addComponent(cmbClasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2))
+                            .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(119, 119, 119)
                         .addComponent(bntGuardarPresupuesto)
@@ -216,22 +236,23 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntGuardarPresupuesto)
                     .addComponent(btnSalirInicio))
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-     
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-      
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnSalirInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirInicioActionPerformed
-         Inicio ventana = new Inicio(this,true);
+        Inicio ventana = new Inicio(this, true);
         ventana.pack();
         setVisible(false);
         ventana.setVisible(true);
@@ -241,12 +262,51 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbClasificacionItemStateChanged
 
+     private void btnGuardarPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {                                           
+     }
+     
+
+    
+    
     private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged
-        if (! (evt.getItem().toString().equals("Ingreso"))) {
+        if (!(evt.getItem().toString().equals("Ingreso"))) {
             cmbClasificacion.setVisible(false);
             txtClasificacion.setVisible(false);
-		}
+        }
     }//GEN-LAST:event_cmbTipoItemStateChanged
+
+    private void cmbIdPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbIdPersonaActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cmbIdPersonaActionPerformed
+
+    private void bntGuardarPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntGuardarPresupuestoActionPerformed
+        // TODO add your handling code here:
+          lbEstado.setText("");
+        try {
+            registrarPresupuesto();
+            dispose();
+        } catch (RuntimeException ex) {
+            lbEstado.setText("Llene los datos correctamente");
+        } catch (Exception ex) {
+            lbEstado.setText("Intente nuevamente");
+        }
+                                         
+
+    }//GEN-LAST:event_bntGuardarPresupuestoActionPerformed
+
+    public void cargarid() {
+        try {
+            ArrayList<Persona> usuarios = procesos.mostrarCedulas();
+            for (Persona temp : usuarios) {
+                cmbIdPersona .addItem(String.valueOf(temp.getId()));
+
+            }
+            
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -288,8 +348,22 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
                 dialog.setVisible(true);
             }
         });
+       
     }
-    
+       public void registrarPresupuesto(){
+        int idPersona = Integer.parseInt((String) cmbIdPersona.getSelectedItem());
+        String annos = (String) cmbAnno.getSelectedItem();
+        int anno = Integer.parseInt(annos);
+        String mes = ((String)cmbMes.getSelectedItem());
+        String semana = ((String)cmbSemana.getSelectedItem());
+        String tipo =((String)cmbTipo.getSelectedItem());
+        String descripcion = txtDescripcion.getText();
+        int monto = Integer.parseInt((String)txtMonto.getText());
+        String clasificacion = (String) cmbClasificacion.getSelectedItem();
+        
+        Presupuesto presupuestos = new Presupuesto(idPersona, anno, mes, semana, tipo,clasificacion, monto, descripcion);
+        procesos.guardarPresupuesto(presupuestos);
+   }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntGuardarPresupuesto;
     private javax.swing.JButton btnGuardar;
@@ -311,6 +385,7 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lbEstado;
     private javax.swing.JLabel txtClasificacion;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtMonto;

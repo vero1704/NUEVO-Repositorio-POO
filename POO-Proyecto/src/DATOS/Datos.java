@@ -2,6 +2,7 @@ package DATOS;
 
 import Entidades.Familia;
 import Entidades.Persona;
+import Entidades.Presupuesto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,20 +16,20 @@ import javax.swing.JOptionPane;
  * @author ma210
  */
 public class Datos {
-    
-     public void insertarFamilia(Familia familias) {
+
+    public void insertarFamilia(Familia familias) {
         try (Connection connection = Conexion.getConexion()) {
-            String sql = "INSERT INTO familia(apellido, provincia, canton, distrito, direccion)\n" +
-"                               VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO familia(apellido, provincia, canton, distrito, direccion)\n"
+                    + "                               VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement p = connection.prepareStatement(sql);
-            
+
             p.setString(1, familias.getApellido());
             p.setString(2, familias.ubicacion.getProvincia());
             p.setString(3, familias.ubicacion.getCanton());
             p.setString(4, familias.ubicacion.getDistrito());
             p.setString(5, familias.ubicacion.getDireccionExacta());
-    
+
             int res = p.executeUpdate();
 
             if (res == 1) {
@@ -44,12 +45,12 @@ public class Datos {
             throw new RuntimeException("No se pudo establecer la conexión");
         }
     }
-     
-     public ArrayList<Familia> mostrarFamilia() {
-         
-           ArrayList<Familia> familias = new ArrayList<>();
 
-          try (Connection connection = Conexion.getConexion()) {
+    public ArrayList<Familia> mostrarFamilia() {
+
+        ArrayList<Familia> familias = new ArrayList<>();
+
+        try (Connection connection = Conexion.getConexion()) {
             String sql = "select apellido from familia";
 
             Statement s = connection.createStatement();
@@ -66,12 +67,12 @@ public class Datos {
         }
         return familias;
     }
-     
-      public void insertarPersona(Persona personas) {
+
+    public void insertarPersona(Persona personas) {
         try (Connection connection = Conexion.getConexion()) {
-            String sql = "INSERT INTO public.persona(\n" +
-"	id, nombre, edad, trabajo, genero, \"gradoEscolaridad\", familia)\n" +
-"	VALUES (?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO public.persona(\n"
+                    + "	id, nombre, edad, trabajo, genero, \"gradoEscolaridad\", familia)\n"
+                    + "	VALUES (?, ?, ?, ?, ?, ?, ?);";
 
             PreparedStatement p = connection.prepareStatement(sql);
             p.setInt(1, personas.getId());
@@ -81,7 +82,7 @@ public class Datos {
             p.setString(5, personas.getGenero());
             p.setString(6, personas.getEscolaridad());
             p.setInt(7, personas.getFamilia());
-            
+
             int res = p.executeUpdate();
 
             if (res == 1) {
@@ -97,4 +98,62 @@ public class Datos {
             throw new RuntimeException("No se pudo establecer la conexión");
         }
     }
+
+    public ArrayList<Persona> mostrarID() {
+
+        ArrayList<Persona> personas = new ArrayList<>();
+
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "select id from persona";
+
+            Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+
+            while (rs.next()) {
+                Persona customer = new Persona();
+                customer.setId(rs.getInt("id"));
+                personas.add(customer);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+        return personas;
+    }
+
+    public void insertarPresupuesto(Presupuesto presupuestos) {
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "INSERT INTO public.presupuesto(\n" +
+"	 idpersona, anno, mes, semana, tipo, clasificacion, monto, descripcion)\n" +
+"	VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
+
+	
+            PreparedStatement p = connection.prepareStatement(sql);
+            p.setInt(1, presupuestos.getIdPersona());
+            p.setInt(2, presupuestos.getAnno());
+            p.setString(3, presupuestos.getMes());
+            p.setString(4,presupuestos.getSemana());
+            p.setString(5, presupuestos.getTipo());
+            p.setString(6, presupuestos.getClasificacion());
+            p.setInt(7, presupuestos.getMonto());
+            p.setString(8, presupuestos.getDescripcion());
+            
+            
+
+            int res = p.executeUpdate();
+
+            if (res == 1) {
+                JOptionPane.showMessageDialog(null, "Se ha registrado "
+                        + "satisfactoriamente!", "INFORMACION",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Lo sentimos, registro fallido",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+    
+}
 }
