@@ -21,8 +21,9 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
      */
     public RegistrarPresupuesto(java.awt.Frame parent, boolean modal) {
         initComponents();
-        
         cargarid();
+        txtClasificacion.setVisible(false);
+        cmbClasificacion.setVisible(false);
     }
 
     /**
@@ -117,7 +118,7 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
 
         cmbSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione la opción...", "Semana 1", "Semana 2", "Semana 3", "Semana 4" }));
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción....", "Ingreso ", "Egreso" }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingreso ", "Egreso" }));
         cmbTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbTipoItemStateChanged(evt);
@@ -252,9 +253,8 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnSalirInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirInicioActionPerformed
-        Inicio ventana = new Inicio(this, true);
-        ventana.pack();
-        setVisible(false);
+       Inicio ventana = new Inicio(this,true);
+      
         ventana.setVisible(true);
     }//GEN-LAST:event_btnSalirInicioActionPerformed
 
@@ -269,10 +269,11 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
     
     
     private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged
-        if (!(evt.getItem().toString().equals("Ingreso"))) {
-            cmbClasificacion.setVisible(false);
-            txtClasificacion.setVisible(false);
-        }
+        if (evt.getItem().toString().equals("Egreso")) {
+           
+            cmbClasificacion.setVisible(true);
+            txtClasificacion.setVisible(true);
+        }        
     }//GEN-LAST:event_cmbTipoItemStateChanged
 
     private void cmbIdPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbIdPersonaActionPerformed
@@ -357,12 +358,16 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
         String mes = ((String)cmbMes.getSelectedItem());
         String semana = ((String)cmbSemana.getSelectedItem());
         String tipo =((String)cmbTipo.getSelectedItem());
-        String descripcion = txtDescripcion.getText();
+        String descripcion = txtDescripcion.getText();  
         int monto = Integer.parseInt((String)txtMonto.getText());
         String clasificacion = (String) cmbClasificacion.getSelectedItem();
         
+   
         Presupuesto presupuestos = new Presupuesto(idPersona, anno, mes, semana, tipo,clasificacion, monto, descripcion);
         procesos.guardarPresupuesto(presupuestos);
+        
+        
+        
    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntGuardarPresupuesto;
