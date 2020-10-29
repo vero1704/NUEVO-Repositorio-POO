@@ -31,6 +31,11 @@ public class Inicio extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        Eliminar = new javax.swing.JButton();
+        Modificar = new javax.swing.JButton();
+        Eliminar1 = new javax.swing.JButton();
+        Modificar1 = new javax.swing.JButton();
+        Modificar2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +72,41 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/financiar.png"))); // NOI18N
 
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
+
+        Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
+
+        Eliminar1.setText("Eliminar");
+        Eliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Eliminar1ActionPerformed(evt);
+            }
+        });
+
+        Modificar1.setText("Modificar");
+        Modificar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Modificar1ActionPerformed(evt);
+            }
+        });
+
+        Modificar2.setText("Modificar");
+        Modificar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Modificar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,35 +115,54 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(207, 207, 207))
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton2))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(29, 29, 29)
-                            .addComponent(jLabel1)
-                            .addGap(101, 101, 101)
-                            .addComponent(jLabel2)))
-                    .addComponent(jLabel3))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1)
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel2)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
-                        .addGap(72, 72, 72))))
+                        .addGap(66, 66, 66)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Eliminar1)
+                                    .addComponent(Modificar1))
+                                .addGap(64, 64, 64)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Eliminar)
+                                    .addComponent(Modificar))
+                                .addGap(197, 197, 197))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(344, 344, 344)
+                                .addComponent(Modificar2)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -113,6 +172,16 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Eliminar)
+                    .addComponent(Eliminar1))
+                .addGap(15, 15, 15)
+                .addComponent(Modificar2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Modificar)
+                    .addComponent(Modificar1))
                 .addGap(18, 18, 18)
                 .addComponent(lblEstado)
                 .addGap(20, 20, 20))
@@ -141,6 +210,37 @@ public class Inicio extends javax.swing.JFrame {
         setVisible(false);
         ventana.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        EliminarPersona ventana = new EliminarPersona(this,true);
+        ventana.pack();
+        setVisible(false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        ModificarPersona ventana = new ModificarPersona(this,true);
+        ventana.pack();
+        setVisible(false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_ModificarActionPerformed
+
+    private void Eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar1ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_Eliminar1ActionPerformed
+
+    private void Modificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar1ActionPerformed
+        // TODO add your handling code here:
+        ModificarFamilia ventana = new ModificarFamilia(this, true);
+        ventana.pack();
+        setVisible(false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_Modificar1ActionPerformed
+
+    private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Modificar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,6 +289,11 @@ public class Inicio extends javax.swing.JFrame {
   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Eliminar;
+    private javax.swing.JButton Eliminar1;
+    private javax.swing.JButton Modificar;
+    private javax.swing.JButton Modificar1;
+    private javax.swing.JButton Modificar2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

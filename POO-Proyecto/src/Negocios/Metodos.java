@@ -66,4 +66,27 @@ public void guardarPresupuesto(Presupuesto presupuestos) {
         Datos udatos = new Datos();
         udatos.insertarPresupuesto(presupuestos);
     }
+
+public void EliminarCedulas(Persona usuarios) {
+ Datos udatos = new Datos();
+ usu.Eliminar(usuarios);
+}
+
+public void modificarPersona(Persona usuario) {
+
+ Datos udatos = new Datos();
+ udatos.modificarPersona(usuario);
+
+}
+public void EliminarFamilia(Familia familias) {
+ Datos udatos = new Datos();
+ usu.EliminarFamilia(familias);
+}
+
+public void modificarFamilia(Familia familias) {
+
+ Datos udatos = new Datos();
+ udatos.modificarFamilia(familias);
+
+   }
 }

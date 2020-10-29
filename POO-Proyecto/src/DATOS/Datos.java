@@ -123,22 +123,19 @@ public class Datos {
 
     public void insertarPresupuesto(Presupuesto presupuestos) {
         try (Connection connection = Conexion.getConexion()) {
-            String sql = "INSERT INTO public.presupuesto(\n" +
-"	 idpersona, anno, mes, semana, tipo, clasificacion, monto, descripcion)\n" +
-"	VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO public.presupuesto(\n"
+                    + "	 idpersona, anno, mes, semana, tipo, clasificacion, monto, descripcion)\n"
+                    + "	VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
 
-	
             PreparedStatement p = connection.prepareStatement(sql);
             p.setInt(1, presupuestos.getIdPersona());
             p.setInt(2, presupuestos.getAnno());
             p.setString(3, presupuestos.getMes());
-            p.setString(4,presupuestos.getSemana());
+            p.setString(4, presupuestos.getSemana());
             p.setString(5, presupuestos.getTipo());
             p.setString(6, presupuestos.getClasificacion());
             p.setInt(7, presupuestos.getMonto());
             p.setString(8, presupuestos.getDescripcion());
-            
-            
 
             int res = p.executeUpdate();
 
@@ -154,6 +151,108 @@ public class Datos {
             e.printStackTrace();
             throw new RuntimeException("No se pudo establecer la conexión");
         }
-    
+
+    }
+
+    public void Eliminar(Persona personas) {
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "delete  from persona where id = ?";
+
+            PreparedStatement p = connection.prepareStatement(sql);
+            p.setInt(1, personas.getId());
+
+            int res = p.executeUpdate();
+
+            if (res == 1) {
+                JOptionPane.showMessageDialog(null, "Se ha eliminado "
+                        + "satisfactoriamente!", "INFORMACION",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Lo sentimos, registro fallido",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+    }
+
+    public void modificarPersona(Persona personas) {
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "UPDATE persona\n"
+                    + "	SET  nombre=?, edad=?, trabajo=?, genero=?, \"gradoEscolaridad\"=?\n"
+                    + "	WHERE id=?;";
+
+            PreparedStatement p = connection.prepareStatement(sql);
+            p.setString(1, personas.getNombre());
+            p.setInt(2, personas.getEdad());
+            p.setString(3, personas.getTrabajo());
+            p.setString(4, personas.getGenero());
+            p.setString(5, personas.getEscolaridad());
+            p.setInt(6, personas.getId());
+
+            int res = p.executeUpdate();
+
+            if (res == 1) {
+                JOptionPane.showMessageDialog(null, "Se ha modificado "
+                        + "satisfactoriamente!", "INFORMACION",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Lo sentimos, registro fallido",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+    }
+
+    public void EliminarFamilia(Familia familias) {
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "delete  from persona where id = ?";
+
+            PreparedStatement p = connection.prepareStatement(sql);
+            p.setString(1, familias.getApellido());
+
+            int res = p.executeUpdate();
+
+            if (res == 1) {
+                JOptionPane.showMessageDialog(null, "Se ha eliminado "
+                        + "satisfactoriamente!", "INFORMACION",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Lo sentimos, registro fallido",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+    }
+
+    public void modificarFamilia(Familia familias) {
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "UPDATE persona\n"
+                    + "	SET  apellido=?";
+
+            PreparedStatement p = connection.prepareStatement(sql);
+            p.setString(1, familias.getApellido());
+
+            int res = p.executeUpdate();
+
+            if (res == 1) {
+                JOptionPane.showMessageDialog(null, "Se ha modificado "
+                        + "satisfactoriamente!", "INFORMACION",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Lo sentimos, registro fallido",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+    }
 }
-}
+
+

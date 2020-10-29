@@ -24,10 +24,23 @@ public class Persona {
         this.trabajo = trabajo;
     }
 
+    public Persona(int id, String nombre, int edad, String genero, String escolaridad, String trabajo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.genero = genero;
+        this.escolaridad = escolaridad;
+        this.trabajo = trabajo;
+    }
+    
     public Persona() {
         
     }
 
+    public Persona(int id) {
+        this.id = id;
+    }
+    
     public int getId() {
         return id;
     }
@@ -84,10 +97,4 @@ public class Persona {
         this.trabajo = trabajo;
     }
 
-    
-    
-    
-    
-    
-    
 }

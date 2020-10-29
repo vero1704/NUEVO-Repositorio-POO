@@ -15,6 +15,10 @@ public class Familia {
 
     public Familia() {
     }
+
+    public Familia(String Apellido) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 
