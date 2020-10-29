@@ -253,6 +253,29 @@ public class Datos {
             throw new RuntimeException("No se pudo establecer la conexión");
         }
     }
+    public void modificarPresupuesto(Presupuesto presupuestos) {
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "UPDATE persona\n"
+                    + "	SET  apellido=?";
+
+            PreparedStatement p = connection.prepareStatement(sql);
+            p.setInt(1, presupuestos.getIdPersona());
+
+            int res = p.executeUpdate();
+
+            if (res == 1) {
+                JOptionPane.showMessageDialog(null, "Se ha modificado "
+                        + "satisfactoriamente!", "INFORMACION",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Lo sentimos, registro fallido",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+    }
 }
 
 

@@ -21,7 +21,7 @@ public class EliminarFamilia extends javax.swing.JFrame {
     /**
      * Creates new form EliminarFamilia
      */
-    public EliminarFamilia() {
+    public EliminarFamilia(java.awt.Frame parent, boolean modal) {
         initComponents();
         cargarFamilias();
     }
@@ -114,11 +114,19 @@ public class EliminarFamilia extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EliminarFamilia().setVisible(true);
+         java.awt.EventQueue.invokeLater(new Runnable() {
+           public void run() {
+                RegistrarFamilia dialog = new RegistrarFamilia(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
+    
     }
 
     public void cargarFamilias() {

@@ -5,7 +5,6 @@ package GUI;
  * @author ma210
  */
 public class Inicio extends javax.swing.JFrame {
-   
 
     /**
      * Creates new form RegistrarPersona
@@ -191,35 +190,35 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        RegistrarFamilia ventana = new RegistrarFamilia(this,true);
+        RegistrarFamilia ventana = new RegistrarFamilia(this, true);
         ventana.pack();
         setVisible(false);
         ventana.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        RegistrarPersona ventana = new RegistrarPersona(this,true);
+        RegistrarPersona ventana = new RegistrarPersona(this, true);
         ventana.pack();
         setVisible(false);
         ventana.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       RegistrarPresupuesto ventana = new RegistrarPresupuesto(this,true);
+        RegistrarPresupuesto ventana = new RegistrarPresupuesto(this, true);
         ventana.pack();
         setVisible(false);
         ventana.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-        EliminarPersona ventana = new EliminarPersona(this,true);
+        EliminarPersona ventana = new EliminarPersona(this, true);
         ventana.pack();
         setVisible(false);
         ventana.setVisible(true);
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-        ModificarPersona ventana = new ModificarPersona(this,true);
+        ModificarPersona ventana = new ModificarPersona(this, true);
         ventana.pack();
         setVisible(false);
         ventana.setVisible(true);
@@ -227,7 +226,10 @@ public class Inicio extends javax.swing.JFrame {
 
     private void Eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar1ActionPerformed
         // TODO add your handling code here:
-
+        EliminarFamilia ventana = new EliminarFamilia(this, true);
+        ventana.pack();
+        setVisible(false);
+        ventana.setVisible(true);
     }//GEN-LAST:event_Eliminar1ActionPerformed
 
     private void Modificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar1ActionPerformed
@@ -240,6 +242,10 @@ public class Inicio extends javax.swing.JFrame {
 
     private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed
         // TODO add your handling code here:
+        ModificarPresupuesto ventana = new ModificarPresupuesto(this, true);
+        ventana.pack();
+        setVisible(false);
+        ventana.setVisible(true);
     }//GEN-LAST:event_Modificar2ActionPerformed
 
     /**
@@ -272,7 +278,7 @@ public class Inicio extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-             public void run() {
+            public void run() {
                 Inicio dialog = new Inicio(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
@@ -286,8 +292,6 @@ public class Inicio extends javax.swing.JFrame {
     }
 
 
-  
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton Eliminar1;

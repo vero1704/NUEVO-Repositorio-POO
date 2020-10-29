@@ -89,4 +89,10 @@ public void modificarFamilia(Familia familias) {
  udatos.modificarFamilia(familias);
 
    }
+public void modificarPresupuesto(Presupuesto presupuestos) {
+
+ Datos udatos = new Datos();
+ udatos.modificarPresupuesto(presupuestos);
+
+}
 }
