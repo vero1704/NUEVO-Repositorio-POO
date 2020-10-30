@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ModificarPresupuesto extends javax.swing.JFrame {
 
     Metodos procesos = new Metodos();
-
+    ArrayList<Presupuesto> usuarios; 
     /**
      * Creates new form ModificarPresupuesto
      */
@@ -56,6 +56,7 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
         txtClasificacion = new javax.swing.JLabel();
         cmbClasificacion = new javax.swing.JComboBox<>();
         lbEstado = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,14 +131,25 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Clasif. Familiar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(336, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(158, 158, 158))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addComponent(jButton1)
+                .addContainerGap(147, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -174,8 +186,10 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 451, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 504, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -261,6 +275,12 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
     private void cmbClasificacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbClasificacionItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbClasificacionItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        clasifIngreso();
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void cargarid() {
         try {
             ArrayList<Persona> usuarios = procesos.mostrarCedulas();
@@ -332,6 +352,20 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
         Presupuesto presupuestos = new Presupuesto(idPersona, anno, mes, semana, tipo,clasificacion, monto, descripcion);
         procesos.modificarPresupuesto(presupuestos);
     }
+    public void clasifIngreso(){
+        int ingresoFamiliar = 0;
+        int idPersona = Integer.parseInt((String) cmbIdPersona.getSelectedItem());
+        Presupuesto usu = new Presupuesto(idPersona);
+        usuarios = procesos.extraerIngreso(usu);
+        for (Presupuesto temp : usuarios) {
+               ingresoFamiliar = temp.getMonto(); 
+       }
+        
+        
+    }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntGuardarPresupuesto;
     private javax.swing.JButton btnSalirInicio;
@@ -341,6 +375,7 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbMes;
     private javax.swing.JComboBox<String> cmbSemana;
     private javax.swing.JComboBox<String> cmbTipo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -357,7 +357,35 @@ public class Datos {
         }
         return presupuesto;
     }
-    
+    public ArrayList<Presupuesto> extraerIngresoFamilia(Presupuesto persona) {
+             
+        ArrayList<Presupuesto> presupuesto = new ArrayList<>();
+
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "SELECT sum(monto) FROM presupuesto p, persona pe, familia f where p.idpersona = ?\n" +
+"and pe.familia = f.apellido and p.tipo = 'Ingreso '";
+
+            PreparedStatement p = connection.prepareStatement(sql);
+            p.setInt(1, persona.getIdPersona());
+
+            ResultSet rs = p.executeQuery();
+
+            if (rs.next()) {
+                Presupuesto customer = new Presupuesto();
+                customer.setMonto(rs.getInt("monto"));
+
+                presupuesto.add(customer);
+
+            } else {
+                throw new RuntimeException(" ");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+        return presupuesto;
+    }
 }
 
 

@@ -106,6 +106,10 @@ public ArrayList<Presupuesto> extraerEgreso(Presupuesto personas) {
         
         return usu.extraerEgreso(personas);
     }
+public ArrayList<Presupuesto> extraerIngresoFamilia(Presupuesto personas) {
+        
+        return usu.extraerIngreso(personas);
+    }
 }
 
 
