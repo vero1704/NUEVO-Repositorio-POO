@@ -17,7 +17,8 @@ import java.util.ArrayList;
 public class ModificarPresupuesto extends javax.swing.JFrame {
 
     Metodos procesos = new Metodos();
-    ArrayList<Presupuesto> usuarios; 
+    ArrayList<Presupuesto> usuarios;
+
     /**
      * Creates new form ModificarPresupuesto
      */
@@ -56,7 +57,7 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
         txtClasificacion = new javax.swing.JLabel();
         cmbClasificacion = new javax.swing.JComboBox<>();
         lbEstado = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnClasifFamiliar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,10 +132,10 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Clasif. Familiar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnClasifFamiliar.setText("Clasif. Familiar");
+        btnClasifFamiliar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnClasifFamiliarActionPerformed(evt);
             }
         });
 
@@ -148,7 +149,7 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
                 .addGap(158, 158, 158))
             .addGroup(layout.createSequentialGroup()
                 .addGap(146, 146, 146)
-                .addComponent(jButton1)
+                .addComponent(btnClasifFamiliar)
                 .addContainerGap(147, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -188,7 +189,7 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 504, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnClasifFamiliar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,20 +277,21 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbClasificacionItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnClasifFamiliarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClasifFamiliarActionPerformed
         // TODO add your handling code here:
-        
+
         clasifIngreso();
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_btnClasifFamiliarActionPerformed
     public void cargarid() {
         try {
             ArrayList<Persona> usuarios = procesos.mostrarCedulas();
             for (Persona temp : usuarios) {
-                cmbIdPersona .addItem(String.valueOf(temp.getId()));
+                cmbIdPersona.addItem(String.valueOf(temp.getId()));
 
             }
-            
-        }catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -322,8 +324,8 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-         java.awt.EventQueue.invokeLater(new Runnable() {
-           public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 RegistrarFamilia dialog = new RegistrarFamilia(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
@@ -334,40 +336,69 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
                 dialog.setVisible(true);
             }
         });
-    
+
     }
 
     public void modificarPresupuesto() {
         int idPersona = Integer.parseInt((String) cmbIdPersona.getSelectedItem());
         String annos = (String) cmbAnno.getSelectedItem();
         int anno = Integer.parseInt(annos);
-        String mes = ((String)cmbMes.getSelectedItem());
-        String semana = ((String)cmbSemana.getSelectedItem());
-        String tipo =((String)cmbTipo.getSelectedItem());
-        String descripcion = txtDescripcion.getText();  
-        int monto = Integer.parseInt((String)txtMonto.getText());
+        String mes = ((String) cmbMes.getSelectedItem());
+        String semana = ((String) cmbSemana.getSelectedItem());
+        String tipo = ((String) cmbTipo.getSelectedItem());
+        String descripcion = txtDescripcion.getText();
+        int monto = Integer.parseInt((String) txtMonto.getText());
         String clasificacion = (String) cmbClasificacion.getSelectedItem();
-        
-   
-        Presupuesto presupuestos = new Presupuesto(idPersona, anno, mes, semana, tipo,clasificacion, monto, descripcion);
+
+        Presupuesto presupuestos = new Presupuesto(idPersona, anno, mes, semana, tipo, clasificacion, monto, descripcion);
         procesos.modificarPresupuesto(presupuestos);
     }
-    public void clasifIngreso(){
+
+    public void clasifIngreso() {
         int ingresoFamiliar = 0;
+        String ClasifIngreso = "";
+        ArrayList<Integer> ListaAlta = new ArrayList<Integer>();
+        ArrayList<Integer> ListaMediaAlta = new ArrayList<Integer>();
+        ArrayList<Integer> ListaMediaBaja = new ArrayList<Integer>();
+        ArrayList<Integer> ListaBajaSuperior = new ArrayList<Integer>();
+        ArrayList<Integer> ListaBaja = new ArrayList<Integer>();
+
         int idPersona = Integer.parseInt((String) cmbIdPersona.getSelectedItem());
         Presupuesto usu = new Presupuesto(idPersona);
         usuarios = procesos.extraerIngreso(usu);
+
         for (Presupuesto temp : usuarios) {
-               ingresoFamiliar = temp.getMonto(); 
-       }
-        
-        
+            ingresoFamiliar = temp.getMonto();
+        }
+        if (ingresoFamiliar >= 2000000) {
+            ClasifIngreso = "Clase Alta";
+            ListaAlta.add(idPersona);
+
+        }
+        if (ingresoFamiliar < 200000 && ingresoFamiliar == 800000) {
+            ClasifIngreso = "Clase Media Alta";
+            ListaMediaAlta.add(idPersona);
+        }
+        if (ingresoFamiliar < 800000 && ingresoFamiliar == 500000) {
+            ClasifIngreso = "Clase Media Baja";
+            ListaMediaBaja.add(idPersona);
+        }
+        if (ingresoFamiliar < 500000 && ingresoFamiliar == 300000) {
+            ClasifIngreso = "Clase Baja Superior";
+            ListaBajaSuperior.add(idPersona);
+        }
+        if (ingresoFamiliar < 300000) {
+            ClasifIngreso = "Clase Baja";
+            ListaBaja.add(idPersona);
+        }
+
     }
-    
-    
-    
+
+   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntGuardarPresupuesto;
+    private javax.swing.JButton btnClasifFamiliar;
     private javax.swing.JButton btnSalirInicio;
     private javax.swing.JComboBox<String> cmbAnno;
     private javax.swing.JComboBox<String> cmbClasificacion;
@@ -375,7 +406,6 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbMes;
     private javax.swing.JComboBox<String> cmbSemana;
     private javax.swing.JComboBox<String> cmbTipo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
