@@ -81,7 +81,7 @@ public class Datos {
             p.setString(4, personas.getTrabajo());
             p.setString(5, personas.getGenero());
             p.setString(6, personas.getEscolaridad());
-            p.setInt(7, personas.getFamilia());
+            p.setString(7, personas.getFamilia());
 
             int res = p.executeUpdate();
 
@@ -275,6 +275,27 @@ public class Datos {
             e.printStackTrace();
             throw new RuntimeException("No se pudo establecer la conexión");
         }
+    }
+    public ArrayList<Persona> mostrarIngreso() {
+
+        ArrayList<Persona> personas = new ArrayList<>();
+
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "select id from persona";
+
+            Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+
+            while (rs.next()) {
+                Persona customer = new Persona();
+                customer.setId(rs.getInt("id"));
+                personas.add(customer);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+        return personas;
     }
 }
 

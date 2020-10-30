@@ -253,8 +253,8 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnSalirInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirInicioActionPerformed
-       Inicio ventana = new Inicio(this,true);
-      
+        Inicio ventana = new Inicio(this, true);
+
         ventana.setVisible(true);
     }//GEN-LAST:event_btnSalirInicioActionPerformed
 
@@ -262,18 +262,16 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbClasificacionItemStateChanged
 
-     private void btnGuardarPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {                                           
-     }
-     
+    private void btnGuardarPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    
-    
+
     private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged
         if (evt.getItem().toString().equals("Egreso")) {
-           
+
             cmbClasificacion.setVisible(true);
             txtClasificacion.setVisible(true);
-        }        
+        }
     }//GEN-LAST:event_cmbTipoItemStateChanged
 
     private void cmbIdPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbIdPersonaActionPerformed
@@ -283,7 +281,7 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
 
     private void bntGuardarPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntGuardarPresupuestoActionPerformed
         // TODO add your handling code here:
-          lbEstado.setText("");
+        lbEstado.setText("");
         try {
             registrarPresupuesto();
             dispose();
@@ -292,7 +290,7 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
         } catch (Exception ex) {
             lbEstado.setText("Intente nuevamente");
         }
-                                         
+
 
     }//GEN-LAST:event_bntGuardarPresupuestoActionPerformed
 
@@ -300,11 +298,11 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
         try {
             ArrayList<Persona> usuarios = procesos.mostrarCedulas();
             for (Persona temp : usuarios) {
-                cmbIdPersona .addItem(String.valueOf(temp.getId()));
+                cmbIdPersona.addItem(String.valueOf(temp.getId()));
 
             }
-            
-        }catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -349,26 +347,26 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
                 dialog.setVisible(true);
             }
         });
-       
+
     }
-       public void registrarPresupuesto(){
+
+    public void registrarPresupuesto() {
         int idPersona = Integer.parseInt((String) cmbIdPersona.getSelectedItem());
         String annos = (String) cmbAnno.getSelectedItem();
         int anno = Integer.parseInt(annos);
-        String mes = ((String)cmbMes.getSelectedItem());
-        String semana = ((String)cmbSemana.getSelectedItem());
-        String tipo =((String)cmbTipo.getSelectedItem());
-        String descripcion = txtDescripcion.getText();  
-        int monto = Integer.parseInt((String)txtMonto.getText());
+        String mes = ((String) cmbMes.getSelectedItem());
+        String semana = ((String) cmbSemana.getSelectedItem());
+        String tipo = ((String) cmbTipo.getSelectedItem());
+        String descripcion = txtDescripcion.getText();
+        int monto = Integer.parseInt((String) txtMonto.getText());
         String clasificacion = (String) cmbClasificacion.getSelectedItem();
-        
-   
-        Presupuesto presupuestos = new Presupuesto(idPersona, anno, mes, semana, tipo,clasificacion, monto, descripcion);
+
+        Presupuesto presupuestos = new Presupuesto(idPersona, anno, mes, semana, tipo, clasificacion, monto, descripcion);
         procesos.guardarPresupuesto(presupuestos);
-        
-        
-        
-   }
+
+
+    
+        }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntGuardarPresupuesto;
     private javax.swing.JButton btnGuardar;
