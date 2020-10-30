@@ -293,7 +293,7 @@ public class RegistrarPersona extends javax.swing.JFrame {
     public void registrarPersona(){
         int id = Integer.parseInt(txtId.getText());
         String nombre = txtNombre.getText();
-        int familia = cmbFamilia.getSelectedIndex();
+        String familia = (String) cmbFamilia.getSelectedItem();
         String genero = (String) cmbGenero.getSelectedItem();
         int edad = Integer.parseInt(txtEdad.getText());
         String escolaridad = txtEscolaridad.getText();

@@ -94,15 +94,5 @@ public void modificarPresupuesto(Presupuesto presupuestos) {
  Datos udatos = new Datos();
  udatos.modificarPresupuesto(presupuestos);
 
-}
-
-public ArrayList<Presupuesto> extraerIngreso(Presupuesto personas) {
-        
-        return usu.extraerIngreso(personas);
-    }
-
-public ArrayList<Presupuesto> extraerEgreso(Presupuesto personas) {
-        
-        return usu.extraerEgreso(personas);
-    }
+}       
 }

@@ -83,7 +83,7 @@ public class Datos {
             p.setString(4, personas.getTrabajo());
             p.setString(5, personas.getGenero());
             p.setString(6, personas.getEscolaridad());
-            p.setInt(7, personas.getFamilia());
+            p.setString(7, personas.getFamilia());
 
             int res = p.executeUpdate();
 
@@ -278,63 +278,26 @@ public class Datos {
             throw new RuntimeException("No se pudo establecer la conexión");
         }
     }
-    
-         public ArrayList<Presupuesto> extraerIngreso(Presupuesto persona) {
-             
-        ArrayList<Presupuesto> presupuesto = new ArrayList<>();
+    public ArrayList<Persona> mostrarIngreso() {
+
+        ArrayList<Persona> personas = new ArrayList<>();
 
         try (Connection connection = Conexion.getConexion()) {
-            String sql = "select monto from presupuesto where idpersona = ? and tipo = 'Ingreso '";
+            String sql = "select id from persona";
 
-            PreparedStatement p = connection.prepareStatement(sql);
-            p.setInt(1, persona.getIdPersona());
+            Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(sql);
 
-            ResultSet rs = p.executeQuery();
-
-            if (rs.next()) {
-                Presupuesto customer = new Presupuesto();
-                customer.setMonto(rs.getInt("monto"));
-
-                presupuesto.add(customer);
-
-            } else {
-                throw new RuntimeException(" ");
+            while (rs.next()) {
+                Persona customer = new Persona();
+                customer.setId(rs.getInt("id"));
+                personas.add(customer);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("No se pudo establecer la conexión");
         }
-        return presupuesto;
-    }
-         
-          public ArrayList<Presupuesto> extraerEgreso(Presupuesto persona) {
-             
-        ArrayList<Presupuesto> presupuesto = new ArrayList<>();
-
-        try (Connection connection = Conexion.getConexion()) {
-            String sql = "select monto from presupuesto where idpersona = ? and tipo = 'Egreso'";
-
-            PreparedStatement p = connection.prepareStatement(sql);
-            p.setInt(1, persona.getIdPersona());
-
-            ResultSet rs = p.executeQuery();
-
-            if (rs.next()) {
-                Presupuesto customer = new Presupuesto();
-                customer.setMonto(rs.getInt("monto"));
-
-                presupuesto.add(customer);
-
-            } else {
-                throw new RuntimeException(" ");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("No se pudo establecer la conexión");
-        }
-        return presupuesto;
+        return personas;
     }
 }
 

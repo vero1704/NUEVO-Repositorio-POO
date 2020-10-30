@@ -8,13 +8,13 @@ public class Persona {
     
     public int id;
     public String nombre;
-    public int familia;
+    public String familia;
     public int edad;
     public String genero;
     public String escolaridad;
     public String trabajo;
 
-    public Persona(int id, String nombre, int familia, int edad, String genero, String escolaridad, String trabajo) {
+    public Persona(int id, String nombre, String familia, int edad, String genero, String escolaridad, String trabajo) {
         this.id = id;
         this.nombre = nombre;
         this.familia = familia;
@@ -57,11 +57,11 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public int getFamilia() {
+    public String getFamilia() {
         return familia;
     }
 
-    public void setFamilia(int familia) {
+    public void setFamilia(String familia) {
         this.familia = familia;
     }
 
