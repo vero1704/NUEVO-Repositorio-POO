@@ -25,6 +25,11 @@ public class Presupuesto {
         this.descripcion = descripcion;
     }
 
+    public Presupuesto(int idPersona) {
+        this.idPersona = idPersona;
+    }
+    
+    
     public int getIdPersona() {
         return idPersona;
     }

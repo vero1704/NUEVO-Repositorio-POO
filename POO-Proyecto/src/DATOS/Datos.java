@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
  * @author ma210
  */
 public class Datos {
+    
+    private ResultSet rs = null;
+    private Statement s = null;
 
     public void insertarFamilia(Familia familias) {
         try (Connection connection = Conexion.getConexion()) {
@@ -23,7 +26,6 @@ public class Datos {
                     + "                               VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement p = connection.prepareStatement(sql);
-
             p.setString(1, familias.getApellido());
             p.setString(2, familias.ubicacion.getProvincia());
             p.setString(3, familias.ubicacion.getCanton());
@@ -276,6 +278,65 @@ public class Datos {
             throw new RuntimeException("No se pudo establecer la conexión");
         }
     }
+    
+         public ArrayList<Presupuesto> extraerIngreso(Presupuesto persona) {
+             
+        ArrayList<Presupuesto> presupuesto = new ArrayList<>();
+
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "select monto from presupuesto where idpersona = ? and tipo = 'Ingreso '";
+
+            PreparedStatement p = connection.prepareStatement(sql);
+            p.setInt(1, persona.getIdPersona());
+
+            ResultSet rs = p.executeQuery();
+
+            if (rs.next()) {
+                Presupuesto customer = new Presupuesto();
+                customer.setMonto(rs.getInt("monto"));
+
+                presupuesto.add(customer);
+
+            } else {
+                throw new RuntimeException(" ");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+        return presupuesto;
+    }
+         
+          public ArrayList<Presupuesto> extraerEgreso(Presupuesto persona) {
+             
+        ArrayList<Presupuesto> presupuesto = new ArrayList<>();
+
+        try (Connection connection = Conexion.getConexion()) {
+            String sql = "select monto from presupuesto where idpersona = ? and tipo = 'Egreso'";
+
+            PreparedStatement p = connection.prepareStatement(sql);
+            p.setInt(1, persona.getIdPersona());
+
+            ResultSet rs = p.executeQuery();
+
+            if (rs.next()) {
+                Presupuesto customer = new Presupuesto();
+                customer.setMonto(rs.getInt("monto"));
+
+                presupuesto.add(customer);
+
+            } else {
+                throw new RuntimeException(" ");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("No se pudo establecer la conexión");
+        }
+        return presupuesto;
+    }
 }
+
 
 

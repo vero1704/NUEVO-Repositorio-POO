@@ -59,6 +59,7 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
         txtClasificacion = new javax.swing.JLabel();
         cmbClasificacion = new javax.swing.JComboBox<>();
         lbEstado = new javax.swing.JLabel();
+        btnAhorro = new javax.swing.JButton();
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -151,16 +152,25 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
             }
         });
 
+        btnAhorro.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnAhorro.setText("Ahorro");
+        btnAhorro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAhorroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel3)
@@ -168,9 +178,8 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel9)
-                                    .addComponent(txtClasificacion))
-                                .addGap(39, 39, 39)
+                                    .addComponent(jLabel9))
+                                .addGap(44, 44, 44)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cmbIdPersona, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -179,16 +188,20 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
                                     .addComponent(cmbSemana, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtMonto)
-                                    .addComponent(txtDescripcion)
-                                    .addComponent(cmbClasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2))
-                            .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(bntGuardarPresupuesto)
-                        .addGap(35, 35, 35)
-                        .addComponent(btnSalirInicio)))
+                                    .addComponent(txtDescripcion)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(txtClasificacion)
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbClasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(bntGuardarPresupuesto)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnSalirInicio)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnAhorro)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -229,16 +242,18 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jLabel9))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cmbClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtClasificacion))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntGuardarPresupuesto)
-                    .addComponent(btnSalirInicio))
+                    .addComponent(btnSalirInicio)
+                    .addComponent(btnAhorro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE))
+                .addComponent(lbEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -296,12 +311,19 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bntGuardarPresupuestoActionPerformed
 
+    private void btnAhorroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAhorroActionPerformed
+        int idPersona = Integer.parseInt((String) cmbIdPersona.getSelectedItem());
+        IngresarAhorro childFrame = new IngresarAhorro(idPersona); //Creo una instancia de mi otra ventana "childFrame"
+       childFrame.setLocationRelativeTo(null); //Que cuando aparezca la ventana sea en el centro de la pantalla principal
+       childFrame.setResizable(false); //Que no se pueda cambiar el tamaño
+       childFrame.setVisible(true); //Que sea visible
+    }//GEN-LAST:event_btnAhorroActionPerformed
+
     public void cargarid() {
         try {
             ArrayList<Persona> usuarios = procesos.mostrarCedulas();
             for (Persona temp : usuarios) {
                 cmbIdPersona .addItem(String.valueOf(temp.getId()));
-
             }
             
         }catch (Exception e){
@@ -371,6 +393,7 @@ public class RegistrarPresupuesto extends javax.swing.JFrame {
    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntGuardarPresupuesto;
+    private javax.swing.JButton btnAhorro;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSalirInicio;
