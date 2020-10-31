@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import Entidades.Familia;
 import Entidades.Persona;
 import Entidades.Presupuesto;
 import Negocios.Metodos;
@@ -53,6 +52,7 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
         txtMonto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
+        bntGuardarPresupuesto = new javax.swing.JButton();
         btnSalirInicio = new javax.swing.JButton();
         txtClasificacion = new javax.swing.JLabel();
         cmbClasificacion = new javax.swing.JComboBox<>();
@@ -105,6 +105,14 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Mes:");
+
+        bntGuardarPresupuesto.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        bntGuardarPresupuesto.setText("Guardar");
+        bntGuardarPresupuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntGuardarPresupuestoActionPerformed(evt);
+            }
+        });
 
         btnSalirInicio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnSalirInicio.setText("Salir");
@@ -171,7 +179,9 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jLabel2))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(211, 211, 211)
+                            .addGap(97, 97, 97)
+                            .addComponent(bntGuardarPresupuesto)
+                            .addGap(35, 35, 35)
                             .addComponent(btnSalirInicio)))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -222,7 +232,9 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
                         .addComponent(cmbClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtClasificacion))
                     .addGap(18, 18, 18)
-                    .addComponent(btnSalirInicio)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bntGuardarPresupuesto)
+                        .addComponent(btnSalirInicio))
                     .addContainerGap()))
         );
 
@@ -241,6 +253,20 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbTipoItemStateChanged
 
+    private void bntGuardarPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntGuardarPresupuestoActionPerformed
+        // TODO add your handling code here:
+        lbEstado.setText("");
+        try {
+            modificarPresupuesto();
+            dispose();
+        } catch (RuntimeException ex) {
+            lbEstado.setText("Llene los datos correctamente");
+        } catch (Exception ex) {
+            lbEstado.setText("Intente nuevamente");
+        }
+
+    }//GEN-LAST:event_bntGuardarPresupuestoActionPerformed
+
     private void btnSalirInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirInicioActionPerformed
         Inicio ventana = new Inicio(this, true);
 
@@ -255,7 +281,6 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         clasifIngreso();
-
 
     }//GEN-LAST:event_btnClasifFamiliarActionPerformed
     public void cargarid() {
@@ -328,7 +353,6 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
         Presupuesto presupuestos = new Presupuesto(idPersona, anno, mes, semana, tipo, clasificacion, monto, descripcion);
         procesos.modificarPresupuesto(presupuestos);
     }
-  
 
     public void clasifIngreso() {
         int ingresoFamiliar = 0;
@@ -341,145 +365,39 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
 
         int idPersona = Integer.parseInt((String) cmbIdPersona.getSelectedItem());
         Presupuesto usu = new Presupuesto(idPersona);
-        //usuarios = procesos.extraerIngreso(usu);
-        int cantidad = 0;
-        int cantidadpor = 0;
-        int porcentajeAlta = 0;
-        int porcentajeMAlta = 0;
-        int porcentajeMBaja = 0;
-        int porcentajeBSuperior = 0;
-        int porcentajeBaja = 0;
-        int cont = 0;
-        int contA = 0;
-        int contMA = 0;
-        int contMB = 0;
-        int contBS = 0;
-        int contB = 0;
+        usuarios = procesos.extraerIngreso(usu);
 
-        int monto = 0;
-        cantidad = procesos.mostrarReporte().size();
-        cantidadpor = procesos.mostrarReporte().size();
-        while (cantidad > 0) {
-            ArrayList<Presupuesto> usuarios = procesos.extraerIngresoFamilia();
-            
-           
-           ArrayList<Familia> fam = procesos.mostrarReporte();
-            for (Familia temps : fam) {
-            for (Presupuesto temp : usuarios) {
-                if(temps.getApellido().equals(temp.getTipo())){
-                    
-                 if (monto == 0)  { 
-                     monto = temp.getMonto();
-                if (monto >= 2000000) {
-                    contA++;
-                    porcentajeAlta = ((contA * 100) / cantidadpor);
+        for (Presupuesto temp : usuarios) {
+            ingresoFamiliar = temp.getMonto();
+        }
+        if (ingresoFamiliar >= 2000000) {
+            ClasifIngreso = "Clase Alta";
+            ListaAlta.add(idPersona);
 
-                    cantidad--;
-                }
-                if (monto < 2000000 && monto > 800000) {
-                    contMA++;
-                    porcentajeMAlta = ((contMA * 100) / cantidadpor);
+        }
+        if (ingresoFamiliar < 200000 && ingresoFamiliar == 800000) {
+            ClasifIngreso = "Clase Media Alta";
+            ListaMediaAlta.add(idPersona);
+        }
+        if (ingresoFamiliar < 800000 && ingresoFamiliar == 500000) {
+            ClasifIngreso = "Clase Media Baja";
+            ListaMediaBaja.add(idPersona);
+        }
+        if (ingresoFamiliar < 500000 && ingresoFamiliar == 300000) {
+            ClasifIngreso = "Clase Baja Superior";
+            ListaBajaSuperior.add(idPersona);
+        }
+        if (ingresoFamiliar < 300000) {
+            ClasifIngreso = "Clase Baja";
+            ListaBaja.add(idPersona);
+        }
 
-                    cantidad--;
-                }
-                if (monto < 800000 && monto > 500000) {
-                    contMB++;
-                    porcentajeMBaja = ((contMB * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                if (monto < 500000 && monto > 300000) {
-                    contBS++;
-                    porcentajeBSuperior = ((contBS * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                if (monto < 300000) {
-                    contB++;
-                    porcentajeBaja = ((contB * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                 }
-                 else{
-                    
-                    monto += temp.getMonto();
-                    
-                                                    
-                if (monto >= 2000000) {
-                    
-                    porcentajeAlta = ((contA * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                if (monto < 2000000 && monto > 800000) {
-                    
-                    porcentajeMAlta = ((contMA * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                if (monto < 800000 && monto > 500000) {
-                    
-                    porcentajeMBaja = ((contMB * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                if (monto < 500000 && monto > 300000) {
-                    
-                    porcentajeBSuperior = ((contBS * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                if (monto < 300000) {
-                   
-                    porcentajeBaja = ((contB * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                 
-                }
-                        }if (monto >= 2000000) {
-                    contA++;
-                    porcentajeAlta = ((contA * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                if (monto < 2000000 && monto > 800000) {
-                    contMA++;
-                    porcentajeMAlta = ((contMA * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                if (monto < 800000 && monto > 500000) {
-                    contMB++;
-                    porcentajeMBaja = ((contMB * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                if (monto < 500000 && monto > 300000) {
-                    contBS++;
-                    porcentajeBSuperior = ((contBS * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-                if (monto < 300000) {
-                    contB++;
-                    porcentajeBaja = ((contB * 100) / cantidadpor);
-
-                    cantidad--;
-                }
-            }
-            }
-    
-        System.out.println("El porcentaje " + porcentajeAlta + "% corresponde a la clasificación clase alta");
-        System.out.println("El porcentaje " + porcentajeMAlta + "% corresponde a la clasificación clase media alta");
-        System.out.println("El porcentaje " + porcentajeMBaja + "% corresponde a la clasificación clase media baja");
-        System.out.println("El porcentaje " + porcentajeBSuperior + "% corresponde a la clasificación clase baja superior");
-        System.out.println("El porcentaje " + porcentajeBaja + "% corresponde a la clasificación clase baja");
     }
-    }
+
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntGuardarPresupuesto;
     private javax.swing.JButton btnClasifFamiliar;
     private javax.swing.JButton btnSalirInicio;
     private javax.swing.JComboBox<String> cmbAnno;
@@ -503,4 +421,3 @@ public class ModificarPresupuesto extends javax.swing.JFrame {
     private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 }
-

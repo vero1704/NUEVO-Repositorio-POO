@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author ma210
  */
 public class Datos {
-
+    
     private ResultSet rs = null;
     private Statement s = null;
 
@@ -255,7 +255,6 @@ public class Datos {
             throw new RuntimeException("No se pudo establecer la conexión");
         }
     }
-
     public void modificarPresupuesto(Presupuesto presupuestos) {
         try (Connection connection = Conexion.getConexion()) {
             String sql = "UPDATE persona\n"
@@ -279,7 +278,6 @@ public class Datos {
             throw new RuntimeException("No se pudo establecer la conexión");
         }
     }
-
     public ArrayList<Persona> mostrarIngreso() {
 
         ArrayList<Persona> personas = new ArrayList<>();
@@ -301,9 +299,9 @@ public class Datos {
         }
         return personas;
     }
-
-    public ArrayList<Presupuesto> extraerIngreso(Presupuesto persona) {
-
+    
+     public ArrayList<Presupuesto> extraerIngreso(Presupuesto persona) {
+             
         ArrayList<Presupuesto> presupuesto = new ArrayList<>();
 
         try (Connection connection = Conexion.getConexion()) {
@@ -330,9 +328,9 @@ public class Datos {
         }
         return presupuesto;
     }
-
-    public ArrayList<Presupuesto> extraerEgreso(Presupuesto persona) {
-
+         
+          public ArrayList<Presupuesto> extraerEgreso(Presupuesto persona) {
+             
         ArrayList<Presupuesto> presupuesto = new ArrayList<>();
 
         try (Connection connection = Conexion.getConexion()) {
@@ -359,49 +357,36 @@ public class Datos {
         }
         return presupuesto;
     }
+    public ArrayList<Presupuesto> extraerIngresoFamilia(Presupuesto persona) {
+             
+        ArrayList<Presupuesto> presupuesto = new ArrayList<>();
 
-    public ArrayList<Presupuesto>extraerIngresoFamilia() {
-       ArrayList<Presupuesto> presupuesto = new ArrayList<>();
-   
         try (Connection connection = Conexion.getConexion()) {
-            String sql = "SELECT f.apellido,p.monto FROM presupuesto p, persona pe, familia f\n"+
-"where p.idpersona = pe.id and  pe.familia = f.apellido and p.tipo = 'Ingreso '" ;
+            String sql = "SELECT sum(monto) FROM presupuesto p, persona pe, familia f where p.idpersona = ?\n" +
+"and pe.familia = f.apellido and p.tipo = 'Ingreso '";
+
             PreparedStatement p = connection.prepareStatement(sql);
+            p.setInt(1, persona.getIdPersona());
+
             ResultSet rs = p.executeQuery();
-            
-            while (rs.next()) {
+
+            if (rs.next()) {
                 Presupuesto customer = new Presupuesto();
-                customer.setTipo(rs.getString("apellido"));
                 customer.setMonto(rs.getInt("monto"));
+
                 presupuesto.add(customer);
-                            }
+
+            } else {
+                throw new RuntimeException(" ");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("No se pudo establecer la conexión");
         }
         return presupuesto;
-        
-    }
-     public ArrayList<Presupuesto>extraerEgresoFamilia() {
-       ArrayList<Presupuesto> presupuesto = new ArrayList<>();
-   
-        try (Connection connection = Conexion.getConexion()) {
-            String sql = "SELECT f.apellido,p.monto FROM presupuesto p, persona pe, familia f\n"+
-"where p.idpersona = pe.id and  pe.familia = f.apellido and p.tipo = 'Egreso'" ;
-            PreparedStatement p = connection.prepareStatement(sql);
-            ResultSet rs = p.executeQuery();
-            
-            while (rs.next()) {
-                Presupuesto customer = new Presupuesto();
-                customer.setTipo(rs.getString("apellido"));
-                customer.setMonto(rs.getInt("monto"));
-                presupuesto.add(customer);
-                            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("No se pudo establecer la conexión");
-        }
-        return presupuesto;
-        
     }
 }
+
+
+

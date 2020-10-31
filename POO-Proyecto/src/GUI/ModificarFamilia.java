@@ -19,7 +19,7 @@ public class ModificarFamilia extends javax.swing.JFrame {
 
     public ModificarFamilia(java.awt.Frame parent, boolean modal) {
         initComponents();
-        cargarFamilias();               //Call the method for the ejecution
+        cargarFamilias();
     }
 
     /**
@@ -201,7 +201,7 @@ public class ModificarFamilia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void cargarFamilias() {          
+    public void cargarFamilias() {
         try {
             ArrayList<Familia> usuarios = procesos.mostrarReporte();
             for (Familia temp : usuarios) {
