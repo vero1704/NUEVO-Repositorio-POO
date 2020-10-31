@@ -7,6 +7,7 @@ package Entidades;
 public class Familia {
     public String Apellido;
     public Ubicacion ubicacion;
+    public int presupuesto;
 
     public Familia(String Apellido, Ubicacion ubicacion) {
         this.Apellido = Apellido;

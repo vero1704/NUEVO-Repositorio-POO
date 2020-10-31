@@ -64,9 +64,7 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
-                          <Component id="bntGuardarPresupuesto" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="211" max="-2" attributes="0"/>
                           <Component id="btnSalirInicio" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -133,10 +131,7 @@
                       <Component id="txtClasificacion" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="bntGuardarPresupuesto" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSalirInicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnSalirInicio" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -303,17 +298,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDescripcion">
-    </Component>
-    <Component class="javax.swing.JButton" name="bntGuardarPresupuesto">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Guardar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntGuardarPresupuestoActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSalirInicio">
       <Properties>
